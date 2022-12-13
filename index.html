@@ -66,99 +66,7 @@
                         <h1 id="title" class="mt-3">Dashboard</h1>
                         <hr id="main-hr">
 
-                        <!-- Battery State  -------------------------------------------Start------------------------------------------------------------------------->
-
-                        <!-- Card 윗줄 4개 -->
-<!--                        <div class="row">-->
-
-<!--                            <div class="col-xl-3 col-md-6">-->
-<!--                                <div class="card mb-4">-->
-<!--                                    <div class="card-header">-->
-<!--                                        <b>배터리 온도</b>-->
-<!--                                    </div>-->
-<!--                                    <div class="card-body d-flex justify-content-center flex-row align-items-center">-->
-<!--                                        <div class="w-50 d-flex text-center">-->
-<!--                                            <div class="w-100 text-in-card" id="battery-tem">&lt;!&ndash; From Javascript &ndash;&gt;</div>-->
-<!--                                        </div>-->
-<!--                                        &lt;!&ndash; from https://codepen.io/Arkellys/pen/rgpNBK &ndash;&gt;-->
-<!--                                        <div class="w-50" id="wrapper">-->
-<!--                                            <div id="thermometer">-->
-<!--                                                <div id="temperature" style="height:0" data-value="0°C"></div>-->
-<!--                                                <div id="graduations"></div>-->
-<!--                                            </div>-->
-<!--                                            <div id="playground">-->
-<!--                                                <div id="range">-->
-<!--                                                    <input type="range" min="0" max="100" style="display: none;">-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        &lt;!&ndash; end &ndash;&gt;-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                            <div class="col-xl-3 col-md-6">-->
-<!--                                <div class="card mb-4">-->
-<!--                                    <div class="card-header">-->
-<!--                                        <b>배터리</b>-->
-<!--                                    </div>-->
-<!--                                    <div class="card-body d-flex justify-content-center flex-column align-items-center">-->
-<!--                                        <div class="w-50">-->
-<!--                                            <div><img class="icon-in-card" src="images/volt_icon.png"></div>-->
-<!--                                            <hr class="hr-in-card">-->
-<!--                                            <div class="text-in-card text-in-card-exception" id="battery-volt">&lt;!&ndash; From Javascript &ndash;&gt;</div>-->
-<!--                                        </div>-->
-<!--                                        <br>-->
-<!--                                        <div class="w-50">-->
-<!--                                            <div><img class="icon-in-card" src="images/ampere_icon.png"></div>-->
-<!--                                            <hr class="hr-in-card">-->
-<!--                                            <div class="text-in-card text-in-card-exception" id="battery-ampere">&lt;!&ndash; From Javascript &ndash;&gt;</div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                            <div class="col-xl-3 col-md-6">-->
-<!--                                <div class="card mb-4">-->
-<!--                                    <div class="card-header">-->
-<!--                                        <b>금일 충ㆍ방전량</b>-->
-<!--                                    </div>-->
-<!--                                    <div class="card-body d-flex justify-content-center flex-column align-items-center">-->
-<!--                                        <div class="w-50">-->
-<!--                                            <div><img class="icon-in-card" src="images/charge_icon.png"></div>-->
-<!--                                            <hr class="hr-in-card">-->
-<!--                                            <div class="text-in-card text-in-card-exception" id="today-charge">&lt;!&ndash; From Javascript &ndash;&gt;</div>-->
-<!--                                        </div>-->
-<!--                                        <br>-->
-<!--                                        <div class="w-50">-->
-<!--                                            <div><img class="icon-in-card" src="images/discharge_icon.png"></div>-->
-<!--                                            <hr class="hr-in-card">-->
-<!--                                            <div class="text-in-card text-in-card-exception" id="today-discharge">&lt;!&ndash; From Javascript &ndash;&gt;</div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                            <div class="col-xl-3 col-md-6">-->
-<!--                                <div class="card mb-4">-->
-<!--                                    <div class="card-header">-->
-<!--                                        <b>SoC</b>-->
-<!--                                    </div>-->
-<!--                                    <div class="card-body d-flex justify-content-center flex-column align-items-center">-->
-<!--                                        <div class="w-100 d-flex text-center">-->
-<!--                                            <div class="w-100 text-in-card" id="battery-volume">&lt;!&ndash; From Javascript &ndash;&gt;</div>-->
-<!--                                        </div>-->
-<!--                                        <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="batteryVolume-chart">-->
-<!--                                            &lt;!&ndash; From Javascript &ndash;&gt;-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                        </div>-->
-
-
-                        <!-- Card 아랫줄 4개 -->
+                        <!-- Battery State  -------------------------------------------Start------------------------------------------------------------->
                         <div class="row">
 
                             <div class="col-xl-3 col-md-6">
@@ -230,9 +138,23 @@
                             </div>
 
                         </div>
+                        <!-- Battery State  ---------------------------------------------End------------------------------------------------------------>
 
-                        <!-- Battery State  ---------------------------------------------End------------------------------------------------------------------------->
+                        <div class="row">
 
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <b>Web Socket Test</b>
+                                    </div>
+                                    <div class="card-body d-flex justify-content-center align-items-center">
+                                        <div class="w-50 d-flex text-center">
+                                            <div class="w-100" id="test"><!-- From Javascript --></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </main>
             </div>
@@ -251,6 +173,5 @@
         <!-- d3.js Chart -->
         <script src="https://d3js.org/d3.v3.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
-
     </body>
 </html>

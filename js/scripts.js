@@ -189,13 +189,17 @@ function init() {
     setInterval(clock, 1000);              //현재 시간 1초 루프
     setInterval(apiCall, 1000);            //API 1초 루프
 
-    let socket = new WebSocket("ws://" + window.location.host + "/bsb/websocket");
-
-    socket.onopen = function (e) {
-        console.log("[Open] Connection on");
-        socket.send("SSUM JIN");
+    let socket = new WebSocket("ws://49.238.167.73:30002");
+    socket.onopen = ()=>{
+        console.log("웹소켓 연결 성공");
     };
 
+    socket.onmessage = function (e){
+        document.getElementById("test").innerText = e.data;
+    }
+    socket.onclose = function(){
+        console.log("웹 소켓 연결 종료");
+    }
 }
 
 //Static Resource 모두 로딩 후 Start
