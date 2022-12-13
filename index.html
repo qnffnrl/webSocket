@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Dashboard - Battery Status</title>
+        <link rel="shortcut icon" href="images/tab_icon.png">
+        <!-- 1번 카드 온도계 CSS -->
+        <link rel="stylesheet" href="css/thermometer.css">
+        <!-- Custom CSS -->
+        <link crossorigin rel="preload" href="css/custom.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <!-- Bootstrap Default -->
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet">
+        <link href="css/styles.css" rel="stylesheet">
+        <!-- d3.js Chart -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
+    </head>
+
+    <body class="sb-nav-fixed sb-sidenav-toggled px-3">
+
+        <!-- Navigation Bar -->
+        <nav id="nav-bar" class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Logo -->
+            <a id="logo" class="navbar-brand ps-3" href="index.html"><img src="images/logo.png"></a>
+
+            <!-- Trigger for Change Theme -->
+            <input class="btn" type="button" value="Dark" onclick="setDisplayTheme(this);">
+
+            <!-- Present Time Print -->
+            <div id="time-sector" class="d-md-inline-block ms-auto me-0 me-md-3 my-2 my-md-0 d-flex">
+                <div>
+                    <div>현재시간</div>
+                    <div class="bn_date">
+                        <!-- From Javascript -->
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+
+                        <br><br>
+
+<!--                        &lt;!&ndash; PCS 용량, 운영상태 출력 부분 &ndash;&gt;-->
+<!--                        <div id="power-state-parent" class="mt-3 d-flex justify-content-end">-->
+<!--                            <div class="border rounded fs-5 d-flex justify-content-between align-items-center px-2">-->
+<!--                                <span id="pcs">PCS 용량 : 200kW</span>-->
+<!--                            </div>-->
+
+<!--                            &lt;!&ndash; Power State &ndash;&gt;-->
+<!--                            <div id="power-state" class="border rounded fs-4 d-flex justify-content-between align-items-center px-2">-->
+<!--                                <span id="operating-state">운영상태</span>-->
+<!--                                <span>-->
+<!--                                    <div class="circle">-->
+<!--                                        &lt;!&ndash; From Javascript &ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                </span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+                        <!-- Title -->
+                        <h1 id="title" class="mt-3">Dashboard</h1>
+                        <hr id="main-hr">
+
+                        <!-- Battery State  -------------------------------------------Start------------------------------------------------------------------------->
+
+                        <!-- Card 윗줄 4개 -->
+<!--                        <div class="row">-->
+
+<!--                            <div class="col-xl-3 col-md-6">-->
+<!--                                <div class="card mb-4">-->
+<!--                                    <div class="card-header">-->
+<!--                                        <b>배터리 온도</b>-->
+<!--                                    </div>-->
+<!--                                    <div class="card-body d-flex justify-content-center flex-row align-items-center">-->
+<!--                                        <div class="w-50 d-flex text-center">-->
+<!--                                            <div class="w-100 text-in-card" id="battery-tem">&lt;!&ndash; From Javascript &ndash;&gt;</div>-->
+<!--                                        </div>-->
+<!--                                        &lt;!&ndash; from https://codepen.io/Arkellys/pen/rgpNBK &ndash;&gt;-->
+<!--                                        <div class="w-50" id="wrapper">-->
+<!--                                            <div id="thermometer">-->
+<!--                                                <div id="temperature" style="height:0" data-value="0°C"></div>-->
+<!--                                                <div id="graduations"></div>-->
+<!--                                            </div>-->
+<!--                                            <div id="playground">-->
+<!--                                                <div id="range">-->
+<!--                                                    <input type="range" min="0" max="100" style="display: none;">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        &lt;!&ndash; end &ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                            <div class="col-xl-3 col-md-6">-->
+<!--                                <div class="card mb-4">-->
+<!--                                    <div class="card-header">-->
+<!--                                        <b>배터리</b>-->
+<!--                                    </div>-->
+<!--                                    <div class="card-body d-flex justify-content-center flex-column align-items-center">-->
+<!--                                        <div class="w-50">-->
+<!--                                            <div><img class="icon-in-card" src="images/volt_icon.png"></div>-->
+<!--                                            <hr class="hr-in-card">-->
+<!--                                            <div class="text-in-card text-in-card-exception" id="battery-volt">&lt;!&ndash; From Javascript &ndash;&gt;</div>-->
+<!--                                        </div>-->
+<!--                                        <br>-->
+<!--                                        <div class="w-50">-->
+<!--                                            <div><img class="icon-in-card" src="images/ampere_icon.png"></div>-->
+<!--                                            <hr class="hr-in-card">-->
+<!--                                            <div class="text-in-card text-in-card-exception" id="battery-ampere">&lt;!&ndash; From Javascript &ndash;&gt;</div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                            <div class="col-xl-3 col-md-6">-->
+<!--                                <div class="card mb-4">-->
+<!--                                    <div class="card-header">-->
+<!--                                        <b>금일 충ㆍ방전량</b>-->
+<!--                                    </div>-->
+<!--                                    <div class="card-body d-flex justify-content-center flex-column align-items-center">-->
+<!--                                        <div class="w-50">-->
+<!--                                            <div><img class="icon-in-card" src="images/charge_icon.png"></div>-->
+<!--                                            <hr class="hr-in-card">-->
+<!--                                            <div class="text-in-card text-in-card-exception" id="today-charge">&lt;!&ndash; From Javascript &ndash;&gt;</div>-->
+<!--                                        </div>-->
+<!--                                        <br>-->
+<!--                                        <div class="w-50">-->
+<!--                                            <div><img class="icon-in-card" src="images/discharge_icon.png"></div>-->
+<!--                                            <hr class="hr-in-card">-->
+<!--                                            <div class="text-in-card text-in-card-exception" id="today-discharge">&lt;!&ndash; From Javascript &ndash;&gt;</div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                            <div class="col-xl-3 col-md-6">-->
+<!--                                <div class="card mb-4">-->
+<!--                                    <div class="card-header">-->
+<!--                                        <b>SoC</b>-->
+<!--                                    </div>-->
+<!--                                    <div class="card-body d-flex justify-content-center flex-column align-items-center">-->
+<!--                                        <div class="w-100 d-flex text-center">-->
+<!--                                            <div class="w-100 text-in-card" id="battery-volume">&lt;!&ndash; From Javascript &ndash;&gt;</div>-->
+<!--                                        </div>-->
+<!--                                        <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="batteryVolume-chart">-->
+<!--                                            &lt;!&ndash; From Javascript &ndash;&gt;-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                        </div>-->
+
+
+                        <!-- Card 아랫줄 4개 -->
+                        <div class="row">
+
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <b>배터리실 구역 A</b>
+                                    </div>
+                                    <div class="card-body d-flex justify-content-center flex-column align-items-center">
+                                        <div class="w-100 d-flex text-center">
+                                            <div class="w-50 text-in-card" id="batteryRoom-tem"><!-- From Javascript --></div>
+                                            <div class="w-50 text-in-card" id="batteryRoom-hum"><!-- From Javascript --></div>
+                                        </div>
+                                        <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="batteryRoom-chart">
+                                            <!-- From Javascript -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <b>배터리실 구역 B</b>
+                                    </div>
+                                    <div class="card-body d-flex justify-content-center flex-column align-items-center">
+                                        <div class="w-100 d-flex text-center">
+                                            <div class="w-50 text-in-card" id="indoor1-tem"><!-- From Javascript --></div>
+                                            <div class="w-50 text-in-card" id="indoor1-hum"><!-- From Javascript --></div>
+                                        </div>
+                                        <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="indoor1-chart">
+                                            <!-- From Javascript -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <b>배터리실 구역 C</b>
+                                    </div>
+                                    <div class="card-body d-flex justify-content-center flex-column align-items-center">
+                                        <div class="w-100 d-flex text-center">
+                                            <div class="w-50 text-in-card" id="indoor2-tem"><!-- From Javascript --></div>
+                                            <div class="w-50 text-in-card" id="indoor2-hum"><!-- From Javascript --></div>
+                                        </div>
+                                        <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="indoor2-chart">
+                                            <!-- From Javascript -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <b>배터리실 구역 D</b>
+                                    </div>
+                                    <div class="card-body d-flex justify-content-center flex-column align-items-center">
+                                        <div class="w-100 d-flex text-center">
+                                            <div class="w-50 text-in-card" id="indoor3-tem"><!-- From Javascript --></div>
+                                            <div class="w-50 text-in-card" id="indoor3-hum"><!-- From Javascript --></div>
+                                        </div>
+                                        <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="indoor3-chart">
+                                            <!-- From Javascript -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Battery State  ---------------------------------------------End------------------------------------------------------------------------->
+
+                    </div>
+                </main>
+            </div>
+        </div>
+        <!-- Google Chart -->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+        <!-- Bootstrap Default -->
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Custom JS -->
+        <script src="js/scripts.js"></script>
+
+        <!-- d3.js Chart -->
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+
+    </body>
+</html>
