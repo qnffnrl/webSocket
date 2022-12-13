@@ -189,7 +189,7 @@ function init() {
     setInterval(clock, 1000);              //현재 시간 1초 루프
     setInterval(apiCall, 1000);            //API 1초 루프
 
-    let socket = new WebSocket("ws://49.238.167.73:30002");
+    let socket = new WebSocket("ws://49.238.167.98:8005");
     socket.onopen = ()=>{
         console.log("웹소켓 연결 성공");
     };
