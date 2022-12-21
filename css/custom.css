@@ -1,3 +1,29 @@
+#nav-btn-div{
+    border-bottom: 1px solid grey;
+    margin: 0 1% 0 1%;
+}
+
+#nav-btn-div > div {
+    margin: 3% 0 3% 0;
+}
+
+.anchor{
+    text-decoration: none;
+    color: black;
+    border-right: 1px solid #bebebe;
+}
+
+.anchor{
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+.anchor:hover{
+    color: black;
+    background-color: whitesmoke;
+    cursor: grab;
+}
+
 #nav-bar{
     height: 80px;
 }
@@ -95,3 +121,9 @@
     width: 100%;
     height: 80%;
 }
+
+/* 가운데 4개 짜리 카드 높이 커스텀 */
+.h-96-8{
+    height: 96.8%;
+}
+

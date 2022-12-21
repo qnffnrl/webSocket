@@ -67,94 +67,108 @@
                         <hr id="main-hr">
 
                         <!-- Battery State  -------------------------------------------Start------------------------------------------------------------->
-                        <div class="row">
+                        <div class="row d-flex flex-row justify-content-center">
+                            <div class="flex-column col-xl-3">
 
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <b>배터리실 구역 A</b>
+                                <div>
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <b>배터리실 구역 A</b>
+                                        </div>
+                                        <div class="card-body d-flex justify-content-center flex-column align-items-center">
+                                            <div class="w-100 d-flex text-center">
+                                                <div class="w-50 text-in-card" id="batteryRoom-tem"><!-- From Javascript --></div>
+                                                <div class="w-50 text-in-card" id="batteryRoom-hum"><!-- From Javascript --></div>
+                                            </div>
+                                            <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="batteryRoom-chart">
+                                                <!-- From Javascript -->
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="card-body d-flex justify-content-center flex-column align-items-center">
-                                        <div class="w-100 d-flex text-center">
-                                            <div class="w-50 text-in-card" id="batteryRoom-tem"><!-- From Javascript --></div>
-                                            <div class="w-50 text-in-card" id="batteryRoom-hum"><!-- From Javascript --></div>
+                                </div>
+
+                                <div>
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <b>배터리실 구역 B</b>
                                         </div>
-                                        <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="batteryRoom-chart">
-                                            <!-- From Javascript -->
+                                        <div class="card-body d-flex justify-content-center flex-column align-items-center">
+                                            <div class="w-100 d-flex text-center">
+                                                <div class="w-50 text-in-card" id="indoor1-tem"><!-- From Javascript --></div>
+                                                <div class="w-50 text-in-card" id="indoor1-hum"><!-- From Javascript --></div>
+                                            </div>
+                                            <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="indoor1-chart">
+                                                <!-- From Javascript -->
+                                            </div>
                                         </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="flex-column col-xl-6">
+                                <div class="h-96-8">
+                                    <div class="card mb-4 h-100">   <!-- h-100 -->
+                                        
+                                        <div id="nav-btn-div" class="d-flex align-items-center">
+                                            <div class="w-100 h-50 d-flex align-items-center">
+                                                <a class="anchor">사진</a>
+                                                <a class="anchor">지도</a>
+                                                <a class="anchor">지도</a>
+                                            </div>
+                                        </div>
+
+
+                                        
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <b>배터리실 구역 B</b>
-                                    </div>
-                                    <div class="card-body d-flex justify-content-center flex-column align-items-center">
-                                        <div class="w-100 d-flex text-center">
-                                            <div class="w-50 text-in-card" id="indoor1-tem"><!-- From Javascript --></div>
-                                            <div class="w-50 text-in-card" id="indoor1-hum"><!-- From Javascript --></div>
+                            <div class="flex-column col-xl-3">
+
+                                <div>
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <b>배터리실 구역 C</b>
                                         </div>
-                                        <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="indoor1-chart">
-                                            <!-- From Javascript -->
+                                        <div class="card-body d-flex justify-content-center flex-column align-items-center">
+                                            <div class="w-100 d-flex text-center">
+                                                <div class="w-50 text-in-card" id="indoor2-tem"><!-- From Javascript --></div>
+                                                <div class="w-50 text-in-card" id="indoor2-hum"><!-- From Javascript --></div>
+                                            </div>
+                                            <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="indoor2-chart">
+                                                <!-- From Javascript -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <b>배터리실 구역 C</b>
-                                    </div>
-                                    <div class="card-body d-flex justify-content-center flex-column align-items-center">
-                                        <div class="w-100 d-flex text-center">
-                                            <div class="w-50 text-in-card" id="indoor2-tem"><!-- From Javascript --></div>
-                                            <div class="w-50 text-in-card" id="indoor2-hum"><!-- From Javascript --></div>
+                                <div>
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <b>배터리실 구역 D</b>
                                         </div>
-                                        <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="indoor2-chart">
-                                            <!-- From Javascript -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <b>배터리실 구역 D</b>
-                                    </div>
-                                    <div class="card-body d-flex justify-content-center flex-column align-items-center">
-                                        <div class="w-100 d-flex text-center">
-                                            <div class="w-50 text-in-card" id="indoor3-tem"><!-- From Javascript --></div>
-                                            <div class="w-50 text-in-card" id="indoor3-hum"><!-- From Javascript --></div>
-                                        </div>
-                                        <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="indoor3-chart">
-                                            <!-- From Javascript -->
+                                        <div class="card-body d-flex justify-content-center flex-column align-items-center">
+                                            <div class="w-100 d-flex text-center">
+                                                <div class="w-50 text-in-card" id="indoor3-tem"><!-- From Javascript --></div>
+                                                <div class="w-50 text-in-card" id="indoor3-hum"><!-- From Javascript --></div>
+                                            </div>
+                                            <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="indoor3-chart">
+                                                <!-- From Javascript -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
+
+
+
                         <!-- Battery State  ---------------------------------------------End------------------------------------------------------------>
 
-                        <div class="row">
 
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <b>Web Socket Test</b>
-                                    </div>
-                                    <div class="card-body d-flex justify-content-center align-items-center">
-                                        <div class="w-50 d-flex text-center">
-                                            <div class="w-100" id="test"><!-- From Javascript --></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </main>
             </div>
