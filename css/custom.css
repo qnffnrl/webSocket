@@ -24,6 +24,28 @@
     cursor: grab;
 }
 
+.element{
+    position: relative;
+}
+
+.element:first-child{
+    background-color: red;
+    width: 100%;
+    height: 100%;
+}
+
+.element:nth-child(2){
+    background-color: blue;
+    width: 100%;
+    height: 100%;
+}
+
+.element:last-child{
+    background-color: green;
+    width: 100%;
+    height: 100%;
+}
+
 #nav-bar{
     height: 80px;
 }
@@ -125,5 +147,18 @@
 /* 가운데 4개 짜리 카드 높이 커스텀 */
 .h-96-8{
     height: 96.8%;
+}
+
+/*탭*/
+.tab-content{
+    display: none;
+    padding: 10px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.tab-content.current{
+    display: inherit;
 }
 

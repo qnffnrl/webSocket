@@ -112,75 +112,75 @@ function drawTemHumChart(tem, hum, tagName) {
  *  Change Theme
  *  Dark <-> Light
  */
-function setDisplayTheme(self){
-
-    //Target to Change
-    let element = {
-        body : document.querySelector('body'),
-        btn : document.getElementsByClassName('btn')[0],
-        pcs : document.getElementById('pcs'),
-        operatingState : document.getElementById('operating-state'),
-        title : document.getElementById('title'),
-        hr : document.getElementById('main-hr'),
-        subTitleIcon : document.getElementById('sub-title-icon'),
-        breadcrumbItem : document.getElementById('breadcrumb-item'),
-        cardHeader : document.getElementsByClassName('card-header'),
-        cardBody : document.getElementsByClassName('card-body'),
-        hrInCard : document.getElementsByClassName('hr-in-card'),
-        textInCard: document.getElementsByClassName('text-in-card')
-    };
-
-    //Change to DarkMode
-    if(self.value === 'Dark'){
-        element.body.style.backgroundColor = '#2c2c34';
-        element.btn.style.backgroundColor = 'white';
-        element.btn.style.color = 'black';
-        element.pcs.style.color = 'white';
-        element.operatingState.style.color = 'white';
-        element.title.style.color = 'white';
-        element.hr.style.color = 'white';
-        element.subTitleIcon.style.filter = 'opacity(0.6) drop-shadow(0 0 0 white)';
-        element.breadcrumbItem.style.color = 'white';
-        self.value = 'Light';
-
-        for(let i = 0; i <= 7; i++){
-            element.cardHeader[i].style.backgroundColor = '#51515e';
-            element.cardBody[i].style.backgroundColor = '#5a5c69';
-            element.cardHeader[i].style.color = 'white';
-        }
-        for(let j = 0; j <= 3; j++){
-            element.hrInCard[j].style.color = 'white';
-        }
-        for(let k = 0; k <= 13; k++){
-            element.textInCard[k].style.color = 'white';
-        }
-
-    //Change to LightMode
-    } else {
-        element.body.style.backgroundColor = 'white';
-        element.btn.style.backgroundColor = '#212529';
-        element.btn.style.color = 'white';
-        element.pcs.style.color = 'black';
-        element.operatingState.style.color = 'black';
-        element.title.style.color = 'black';
-        element.hr.style.color = 'black';
-        element.subTitleIcon.style.filter = '';
-        element.breadcrumbItem.style.color = 'black';
-        self.value = 'Dark';
-
-        for(let i = 0; i <= 7; i++){
-            element.cardHeader[i].style.backgroundColor = '#F7F7F7';
-            element.cardHeader[i].style.color = 'black';
-            element.cardBody[i].style.backgroundColor = '#FFFFFF';
-        }
-        for(let j = 0; j <= 3; j++){
-            element.hrInCard[j].style.color = 'black';
-        }
-        for(let k = 0; k <= 13; k++){
-            element.textInCard[k].style.color = 'black';
-        }
-    }
-}
+// function setDisplayTheme(self){
+//
+//     //Target to Change
+//     let element = {
+//         body : document.querySelector('body'),
+//         btn : document.getElementsByClassName('btn')[0],
+//         pcs : document.getElementById('pcs'),
+//         operatingState : document.getElementById('operating-state'),
+//         title : document.getElementById('title'),
+//         hr : document.getElementById('main-hr'),
+//         subTitleIcon : document.getElementById('sub-title-icon'),
+//         breadcrumbItem : document.getElementById('breadcrumb-item'),
+//         cardHeader : document.getElementsByClassName('card-header'),
+//         cardBody : document.getElementsByClassName('card-body'),
+//         hrInCard : document.getElementsByClassName('hr-in-card'),
+//         textInCard: document.getElementsByClassName('text-in-card')
+//     };
+//
+//     //Change to DarkMode
+//     if(self.value === 'Dark'){
+//         element.body.style.backgroundColor = '#2c2c34';
+//         element.btn.style.backgroundColor = 'white';
+//         element.btn.style.color = 'black';
+//         element.pcs.style.color = 'white';
+//         element.operatingState.style.color = 'white';
+//         element.title.style.color = 'white';
+//         element.hr.style.color = 'white';
+//         element.subTitleIcon.style.filter = 'opacity(0.6) drop-shadow(0 0 0 white)';
+//         element.breadcrumbItem.style.color = 'white';
+//         self.value = 'Light';
+//
+//         for(let i = 0; i <= 7; i++){
+//             element.cardHeader[i].style.backgroundColor = '#51515e';
+//             element.cardBody[i].style.backgroundColor = '#5a5c69';
+//             element.cardHeader[i].style.color = 'white';
+//         }
+//         for(let j = 0; j <= 3; j++){
+//             element.hrInCard[j].style.color = 'white';
+//         }
+//         for(let k = 0; k <= 13; k++){
+//             element.textInCard[k].style.color = 'white';
+//         }
+//
+//     //Change to LightMode
+//     } else {
+//         element.body.style.backgroundColor = 'white';
+//         element.btn.style.backgroundColor = '#212529';
+//         element.btn.style.color = 'white';
+//         element.pcs.style.color = 'black';
+//         element.operatingState.style.color = 'black';
+//         element.title.style.color = 'black';
+//         element.hr.style.color = 'black';
+//         element.subTitleIcon.style.filter = '';
+//         element.breadcrumbItem.style.color = 'black';
+//         self.value = 'Dark';
+//
+//         for(let i = 0; i <= 7; i++){
+//             element.cardHeader[i].style.backgroundColor = '#F7F7F7';
+//             element.cardHeader[i].style.color = 'black';
+//             element.cardBody[i].style.backgroundColor = '#FFFFFF';
+//         }
+//         for(let j = 0; j <= 3; j++){
+//             element.hrInCard[j].style.color = 'black';
+//         }
+//         for(let k = 0; k <= 13; k++){
+//             element.textInCard[k].style.color = 'black';
+//         }
+//     }
+// }
 
 function init() {
     clock();
@@ -189,17 +189,17 @@ function init() {
     setInterval(clock, 1000);              //현재 시간 1초 루프
     setInterval(apiCall, 1000);            //API 1초 루프
 
-    let socket = new WebSocket("ws://49.238.167.98:8005");
-    socket.onopen = ()=>{
-        console.log("웹소켓 연결 성공");
-    };
-
-    socket.onmessage = function (e){
-        document.getElementById("test").innerText = e.data;
-    }
-    socket.onclose = function(){
-        console.log("웹 소켓 연결 종료");
-    }
+    // let socket = new WebSocket("ws://49.238.167.98:8005");
+    // socket.onopen = ()=>{
+    //     console.log("웹소켓 연결 성공");
+    // };
+    //
+    // socket.onmessage = function (e){
+    //     document.getElementById("test").innerText = e.data;
+    // }
+    // socket.onclose = function(){
+    //     console.log("웹 소켓 연결 종료");
+    // }
 }
 
 //Static Resource 모두 로딩 후 Start
@@ -210,7 +210,17 @@ $(window).on('load', function(){
 
 
 
+$(document).ready(function(){
+    $('.tabs a').click(function(){
+        var tab_id = $(this).attr('data-tab');
 
+        $('.tabs a').removeClass('current');
+        $('.tab-content').removeClass('current');
+
+        $(this).addClass('current');
+        $("#"+tab_id).addClass('current');
+    });
+});
 
 
 

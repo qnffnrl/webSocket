@@ -15,6 +15,8 @@
         <link href="css/styles.css" rel="stylesheet">
         <!-- d3.js Chart -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
     </head>
 
     <body class="sb-nav-fixed sb-sidenav-toggled px-3">
@@ -25,7 +27,7 @@
             <a id="logo" class="navbar-brand ps-3" href="index.html"><img src="images/logo.png"></a>
 
             <!-- Trigger for Change Theme -->
-            <input class="btn" type="button" value="Dark" onclick="setDisplayTheme(this);">
+<!--            <input class="btn" type="button" value="Dark" onclick="setDisplayTheme(this);">-->
 
             <!-- Present Time Print -->
             <div id="time-sector" class="d-md-inline-block ms-auto me-0 me-md-3 my-2 my-md-0 d-flex">
@@ -111,15 +113,15 @@
                                     <div class="card mb-4 h-100">   <!-- h-100 -->
                                         
                                         <div id="nav-btn-div" class="d-flex align-items-center">
-                                            <div class="w-100 h-50 d-flex align-items-center">
-                                                <a class="anchor">사진</a>
-                                                <a class="anchor">지도</a>
-                                                <a class="anchor">지도</a>
+                                            <div id="ul" class="tabs w-100 h-50 d-flex align-items-center">
+                                                <a class="tab-link current anchor" data-tab="tab-1">사진</a>
+                                                <a class="tab-link anchor" data-tab="tab-2">지도</a>
+                                                <a class="tab-link anchor" data-tab="tab-3">지도</a>
                                             </div>
                                         </div>
-
-
-                                        
+                                        <div id="tab-1" class="tab-content current">tab1</p></div>
+                                        <div id="tab-2" class="tab-content"><p>tab2</p></div>
+                                        <div id="tab-3" class="tab-content"><p>tab3</p></div>
                                     </div>
                                 </div>
                             </div>
