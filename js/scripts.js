@@ -52,19 +52,27 @@ function apiCall() {
 
             $("#batteryRoom-tem").html("온도 : " + rack2['sd1'] + " (℃)");
             $("#batteryRoom-hum").html("습도 : " + rack2['sd2'] + " (%)");
-            drawTemHumChart(rack2['sd1'], rack2['sd2'], "batteryRoom-chart");
+            // drawTemHumChart(rack2['sd1'], rack2['sd2'], "batteryRoom-chart");
+            drawTem(rack2['sd1'], "batteryRoom-chart-A-tem");
+            drawHum(rack2['sd2'], "batteryRoom-chart-A-hum");
 
             $("#indoor1-tem").html("온도 : " + rack3['sd1'] + " (℃)");
             $("#indoor1-hum").html("습도 : " + rack3['sd2'] + " (%)");
-            drawTemHumChart(rack3['sd1'], rack3['sd2'], "indoor1-chart");
+            // drawTemHumChart(rack3['sd1'], rack3['sd2'], "indoor1-chart");
+            drawTem(rack3['sd1'], "batteryRoom-chart-B-tem");
+            drawHum(rack3['sd2'], "batteryRoom-chart-B-hum");
 
             $("#indoor2-tem").html("온도 : " + rack4['sd1'] + " (℃)");
             $("#indoor2-hum").html("습도 : " + rack4['sd2'] + " (%)");
-            drawTemHumChart(rack4['sd1'], rack4['sd2'], "indoor2-chart");
+            // drawTemHumChart(rack4['sd1'], rack4['sd2'], "indoor2-chart");
+            drawTem(rack4['sd1'], "batteryRoom-chart-C-tem");
+            drawHum(rack4['sd2'], "batteryRoom-chart-C-hum");
 
             $("#indoor3-tem").html("온도 : " + rack5['sd1'] + " (℃)");
             $("#indoor3-hum").html("습도 : " + rack5['sd2'] + " (%)");
-            drawTemHumChart(rack5['sd1'], rack5['sd2'], "indoor3-chart");
+            // drawTemHumChart(rack5['sd1'], rack5['sd2'], "indoor3-chart");
+            drawTem(rack5['sd1'], "batteryRoom-chart-D-tem");
+            drawHum(rack5['sd2'], "batteryRoom-chart-D-hum");
 
         }).catch((error) => console.log("error : ", error));
 }
@@ -72,32 +80,85 @@ function apiCall() {
 /**
  * Google Chart
  */
-google.charts.load('visualization', "1", {'packages': ['gauge']});
-google.charts.setOnLoadCallback(drawTemHumChart);
+// google.charts.load('visualization', "1", {'packages': ['gauge']});
+// google.charts.setOnLoadCallback(drawTemHumChart);
+//
+// function drawTemHumChart(tem, hum, tagName) {
+//     let data = google.visualization.arrayToDataTable([
+//         ['Label', 'Value'],
+//         ['Temperature', Number(tem)],
+//         ['Humidity', Number(hum)],
+//     ]);
+//
+//     let options = {
+//         width: "100%", height: "100%",
+//         yellowFrom:75, yellowTo: 90,
+//         redFrom: 90, redTo: 100,
+//         minorTicks: 5,
+//         legend: "test"
+//     };
+//
+//     let chart = new google.visualization.Gauge(document.getElementById(tagName));
+//
+//     chart.draw(data, options);
+//
+//     resizeHandler();
+//     //차트 크기 반응형 핸들러 -start
+//     function resizeHandler () {
+//         chart.draw(data, options);
+//     }
+//     if (window.addEventListener) {
+//         window.addEventListener('resize', resizeHandler, false);
+//     }
+//     else if (window.attachEvent) {
+//         window.attachEvent('onresize', resizeHandler);
+//     }
+//     //차트 크기 반응형 핸들러 -end
+// }
 
-function drawTemHumChart(tem, hum, tagName) {
-    let data = google.visualization.arrayToDataTable([
-        ['Label', 'Value'],
-        ['Temperature', Number(tem)],
-        ['Humidity', Number(hum)],
-    ]);
 
-    let options = {
-        width: "100%", height: "100%",
-        yellowFrom:75, yellowTo: 90,
-        redFrom: 90, redTo: 100,
-        minorTicks: 5,
-        legend: "test"
+function drawTem(tem, tagName){
+
+    var data=[{
+        type: "indicator",
+        mode: "gauge+number+delta",
+        value: Number(tem),
+
+        delta: { increasing: { color: "white" } },
+        gauge: {
+            shape: 'angular',
+            axis: {
+                range: [0, 100],
+                visible: true,
+                tickwidth: 1,
+                tickcolor: "rgb(178, 178, 178)",
+                tickvals: [0, 100],
+                tickmode: 'array',
+                tickfont: {
+                    size: '100px'
+                }
+            },
+            bar: { color: "rgb(237, 61, 61)", thickness: 1 },
+            bgcolor: "rgb(178, 178, 178)",
+            bordercolor: "rgb(178, 178, 178)",
+        }
+    }];
+
+    var layout = {
+        margin: {
+            l: 30,
+            r: 30,
+            b: 5,
+            t: 0,
+            pad: 0
+        }
     };
 
-    let chart = new google.visualization.Gauge(document.getElementById(tagName));
+    Plotly.newPlot(tagName, data, layout);
 
-    chart.draw(data, options);
-
-    resizeHandler();
     //차트 크기 반응형 핸들러 -start
     function resizeHandler () {
-        chart.draw(data, options);
+        Plotly.newPlot(tagName, data, layout);
     }
     if (window.addEventListener) {
         window.addEventListener('resize', resizeHandler, false);
@@ -108,87 +169,76 @@ function drawTemHumChart(tem, hum, tagName) {
     //차트 크기 반응형 핸들러 -end
 }
 
-/**
- *  Change Theme
- *  Dark <-> Light
- */
-// function setDisplayTheme(self){
-//
-//     //Target to Change
-//     let element = {
-//         body : document.querySelector('body'),
-//         btn : document.getElementsByClassName('btn')[0],
-//         pcs : document.getElementById('pcs'),
-//         operatingState : document.getElementById('operating-state'),
-//         title : document.getElementById('title'),
-//         hr : document.getElementById('main-hr'),
-//         subTitleIcon : document.getElementById('sub-title-icon'),
-//         breadcrumbItem : document.getElementById('breadcrumb-item'),
-//         cardHeader : document.getElementsByClassName('card-header'),
-//         cardBody : document.getElementsByClassName('card-body'),
-//         hrInCard : document.getElementsByClassName('hr-in-card'),
-//         textInCard: document.getElementsByClassName('text-in-card')
-//     };
-//
-//     //Change to DarkMode
-//     if(self.value === 'Dark'){
-//         element.body.style.backgroundColor = '#2c2c34';
-//         element.btn.style.backgroundColor = 'white';
-//         element.btn.style.color = 'black';
-//         element.pcs.style.color = 'white';
-//         element.operatingState.style.color = 'white';
-//         element.title.style.color = 'white';
-//         element.hr.style.color = 'white';
-//         element.subTitleIcon.style.filter = 'opacity(0.6) drop-shadow(0 0 0 white)';
-//         element.breadcrumbItem.style.color = 'white';
-//         self.value = 'Light';
-//
-//         for(let i = 0; i <= 7; i++){
-//             element.cardHeader[i].style.backgroundColor = '#51515e';
-//             element.cardBody[i].style.backgroundColor = '#5a5c69';
-//             element.cardHeader[i].style.color = 'white';
-//         }
-//         for(let j = 0; j <= 3; j++){
-//             element.hrInCard[j].style.color = 'white';
-//         }
-//         for(let k = 0; k <= 13; k++){
-//             element.textInCard[k].style.color = 'white';
-//         }
-//
-//     //Change to LightMode
-//     } else {
-//         element.body.style.backgroundColor = 'white';
-//         element.btn.style.backgroundColor = '#212529';
-//         element.btn.style.color = 'white';
-//         element.pcs.style.color = 'black';
-//         element.operatingState.style.color = 'black';
-//         element.title.style.color = 'black';
-//         element.hr.style.color = 'black';
-//         element.subTitleIcon.style.filter = '';
-//         element.breadcrumbItem.style.color = 'black';
-//         self.value = 'Dark';
-//
-//         for(let i = 0; i <= 7; i++){
-//             element.cardHeader[i].style.backgroundColor = '#F7F7F7';
-//             element.cardHeader[i].style.color = 'black';
-//             element.cardBody[i].style.backgroundColor = '#FFFFFF';
-//         }
-//         for(let j = 0; j <= 3; j++){
-//             element.hrInCard[j].style.color = 'black';
-//         }
-//         for(let k = 0; k <= 13; k++){
-//             element.textInCard[k].style.color = 'black';
-//         }
-//     }
-// }
+function drawHum(hum, tagName){
+
+    var data=[{
+        type: "indicator",
+        mode: "gauge+number+delta",
+        value: Number(hum),
+
+        delta: { increasing: { color: "white" } },
+        gauge: {
+            shape: 'angular',
+            axis: {
+                range: [0, 100],
+                visible: true,
+                tickwidth: 1,
+                tickcolor: "rgb(178, 178, 178)",
+                tickvals: [0, 100],
+                tickmode: 'array',
+                tickfont: {
+                    size: '100px'
+                }
+            },
+            bar: { color: "rgb(22,78,222)", thickness: 1 },
+            bgcolor: "rgb(178, 178, 178)",
+            bordercolor: "rgb(178, 178, 178)",
+        }
+    }];
+
+    var layout = {
+        margin: {
+            l: 30,
+            r: 30,
+            b: 5,
+            t: 0,
+            pad: 0
+        }
+    };
+
+    Plotly.newPlot(tagName, data, layout);
+
+    //차트 크기 반응형 핸들러 -start
+    function resizeHandler () {
+        Plotly.newPlot(tagName, data, layout);
+    }
+    if (window.addEventListener) {
+        window.addEventListener('resize', resizeHandler, false);
+    }
+    else if (window.attachEvent) {
+        window.attachEvent('onresize', resizeHandler);
+    }
+    //차트 크기 반응형 핸들러 -end
+}
+
+function map(){
+    var container = document.getElementById('map');
+    var options = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        level: 3
+    };
+
+    var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+}
 
 function init() {
     clock();
     apiCall()
 
     setInterval(clock, 1000);              //현재 시간 1초 루프
-    setInterval(apiCall, 1000);            //API 1초 루프
+    setInterval(apiCall, 5000);            //API 1초 루프
 
+    map();
     // let socket = new WebSocket("ws://49.238.167.98:8005");
     // socket.onopen = ()=>{
     //     console.log("웹소켓 연결 성공");

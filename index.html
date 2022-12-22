@@ -82,8 +82,13 @@
                                                 <div class="w-50 text-in-card" id="batteryRoom-tem"><!-- From Javascript --></div>
                                                 <div class="w-50 text-in-card" id="batteryRoom-hum"><!-- From Javascript --></div>
                                             </div>
-                                            <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="batteryRoom-chart">
-                                                <!-- From Javascript -->
+                                            <div class="d-flex h-100 w-100">
+                                                <div class="w-100 w-50 chart-sector d-flex justify-content-center flex-column align-items-center" id="batteryRoom-chart-A-tem">
+                                                    <!-- From Javascript -->
+                                                </div>
+                                                <div class="w-100 w-50 chart-sector d-flex justify-content-center flex-column align-items-center" id="batteryRoom-chart-A-hum">
+                                                    <!-- From Javascript -->
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -99,8 +104,13 @@
                                                 <div class="w-50 text-in-card" id="indoor1-tem"><!-- From Javascript --></div>
                                                 <div class="w-50 text-in-card" id="indoor1-hum"><!-- From Javascript --></div>
                                             </div>
-                                            <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="indoor1-chart">
-                                                <!-- From Javascript -->
+                                            <div class="d-flex h-100 w-100">
+                                                <div class="w-100 w-50 chart-sector d-flex justify-content-center flex-column align-items-center" id="batteryRoom-chart-B-tem">
+                                                    <!-- From Javascript -->
+                                                </div>
+                                                <div class="w-100 w-50 chart-sector d-flex justify-content-center flex-column align-items-center" id="batteryRoom-chart-B-hum">
+                                                    <!-- From Javascript -->
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -110,8 +120,7 @@
 
                             <div class="flex-column col-xl-6">
                                 <div class="h-96-8">
-                                    <div class="card mb-4 h-100">   <!-- h-100 -->
-                                        
+                                    <div class="card mb-4 h-100 w-100">
                                         <div id="nav-btn-div" class="d-flex align-items-center">
                                             <div id="ul" class="tabs w-100 h-50 d-flex align-items-center">
                                                 <a class="tab-link current anchor" data-tab="tab-1">사진</a>
@@ -119,9 +128,12 @@
                                                 <a class="tab-link anchor" data-tab="tab-3">지도</a>
                                             </div>
                                         </div>
-                                        <div id="tab-1" class="tab-content current">tab1</p></div>
-                                        <div id="tab-2" class="tab-content"><p>tab2</p></div>
-                                        <div id="tab-3" class="tab-content"><p>tab3</p></div>
+                                        <div id="tab-1" class="tab-content current w-100 h-100">
+                                            <div class="w-90 h-90" id="map"></div>
+                                        </div>
+                                        <div id="tab-2" class="tab-content w-100 h-100">
+                                        </div>
+                                        <div id="tab-3" class="tab-content w-100 h-100"><p>tab3</p></div>
                                     </div>
                                 </div>
                             </div>
@@ -138,8 +150,13 @@
                                                 <div class="w-50 text-in-card" id="indoor2-tem"><!-- From Javascript --></div>
                                                 <div class="w-50 text-in-card" id="indoor2-hum"><!-- From Javascript --></div>
                                             </div>
-                                            <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="indoor2-chart">
-                                                <!-- From Javascript -->
+                                            <div class="d-flex h-100 w-100">
+                                                <div class="w-100 w-50 chart-sector d-flex justify-content-center flex-column align-items-center" id="batteryRoom-chart-C-tem">
+                                                    <!-- From Javascript -->
+                                                </div>
+                                                <div class="w-100 w-50 chart-sector d-flex justify-content-center flex-column align-items-center" id="batteryRoom-chart-C-hum">
+                                                    <!-- From Javascript -->
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -155,8 +172,13 @@
                                                 <div class="w-50 text-in-card" id="indoor3-tem"><!-- From Javascript --></div>
                                                 <div class="w-50 text-in-card" id="indoor3-hum"><!-- From Javascript --></div>
                                             </div>
-                                            <div class="chart-sector d-flex justify-content-center flex-column align-items-center" id="indoor3-chart">
-                                                <!-- From Javascript -->
+                                            <div class="d-flex h-100 w-100">
+                                                <div class="w-100 w-50 chart-sector d-flex justify-content-center flex-column align-items-center" id="batteryRoom-chart-D-tem">
+                                                    <!-- From Javascript -->
+                                                </div>
+                                                <div class="w-100 w-50 chart-sector d-flex justify-content-center flex-column align-items-center" id="batteryRoom-chart-D-hum">
+                                                    <!-- From Javascript -->
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -184,10 +206,10 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
         <!-- Custom JS -->
+        <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
         <script src="js/scripts.js"></script>
 
-        <!-- d3.js Chart -->
-        <script src="https://d3js.org/d3.v3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+        <!-- Kakao Map -->
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=289011fd99ce23191c6fa8c1ec66de68"></script>
     </body>
 </html>
