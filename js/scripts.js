@@ -52,118 +52,123 @@ function apiCall() {
 
             $("#batteryRoom-tem").html("온도 : " + rack2['sd1'] + " (℃)");
             $("#batteryRoom-hum").html("습도 : " + rack2['sd2'] + " (%)");
-            // drawTemHumChart(rack2['sd1'], rack2['sd2'], "batteryRoom-chart");
-            drawTem(rack2['sd1'], "batteryRoom-chart-A-tem");
-            drawHum(rack2['sd2'], "batteryRoom-chart-A-hum");
+            drawChart(rack2['sd1'], rack2['sd2'], "batteryRoom-chart-A");
+
 
             $("#indoor1-tem").html("온도 : " + rack3['sd1'] + " (℃)");
             $("#indoor1-hum").html("습도 : " + rack3['sd2'] + " (%)");
-            // drawTemHumChart(rack3['sd1'], rack3['sd2'], "indoor1-chart");
-            drawTem(rack3['sd1'], "batteryRoom-chart-B-tem");
-            drawHum(rack3['sd2'], "batteryRoom-chart-B-hum");
+            drawChart(rack3['sd1'], rack3['sd2'], "batteryRoom-chart-B");
+
 
             $("#indoor2-tem").html("온도 : " + rack4['sd1'] + " (℃)");
             $("#indoor2-hum").html("습도 : " + rack4['sd2'] + " (%)");
-            // drawTemHumChart(rack4['sd1'], rack4['sd2'], "indoor2-chart");
-            drawTem(rack4['sd1'], "batteryRoom-chart-C-tem");
-            drawHum(rack4['sd2'], "batteryRoom-chart-C-hum");
+            drawChart(rack4['sd1'], rack4['sd2'], "batteryRoom-chart-C");
+
 
             $("#indoor3-tem").html("온도 : " + rack5['sd1'] + " (℃)");
             $("#indoor3-hum").html("습도 : " + rack5['sd2'] + " (%)");
-            // drawTemHumChart(rack5['sd1'], rack5['sd2'], "indoor3-chart");
-            drawTem(rack5['sd1'], "batteryRoom-chart-D-tem");
-            drawHum(rack5['sd2'], "batteryRoom-chart-D-hum");
+            drawChart(rack5['sd1'], rack5['sd2'], "batteryRoom-chart-D");
+
 
         }).catch((error) => console.log("error : ", error));
 }
 
-/**
- * Google Chart
- */
-// google.charts.load('visualization', "1", {'packages': ['gauge']});
-// google.charts.setOnLoadCallback(drawTemHumChart);
-//
-// function drawTemHumChart(tem, hum, tagName) {
-//     let data = google.visualization.arrayToDataTable([
-//         ['Label', 'Value'],
-//         ['Temperature', Number(tem)],
-//         ['Humidity', Number(hum)],
-//     ]);
-//
-//     let options = {
-//         width: "100%", height: "100%",
-//         yellowFrom:75, yellowTo: 90,
-//         redFrom: 90, redTo: 100,
-//         minorTicks: 5,
-//         legend: "test"
-//     };
-//
-//     let chart = new google.visualization.Gauge(document.getElementById(tagName));
-//
-//     chart.draw(data, options);
-//
-//     resizeHandler();
-//     //차트 크기 반응형 핸들러 -start
-//     function resizeHandler () {
-//         chart.draw(data, options);
-//     }
-//     if (window.addEventListener) {
-//         window.addEventListener('resize', resizeHandler, false);
-//     }
-//     else if (window.attachEvent) {
-//         window.attachEvent('onresize', resizeHandler);
-//     }
-//     //차트 크기 반응형 핸들러 -end
-// }
+function drawChart(tem, hum, tagName){
+    // console.warn = console.error = () => {};
+    let chartDom;
 
-/**
- * Copyright (c) 2022 by Amanda Santos (https://codepen.io/amandasantosf/pen/qBaNbGK)
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-function drawTem(tem, tagName){
+    if(tagName === "batteryRoom-chart-A"){
+        chartDom = document.getElementById('batteryRoom-chart-A');
+    }else if(tagName === "batteryRoom-chart-B"){
+        chartDom = document.getElementById('batteryRoom-chart-B');
+    }else if(tagName === "batteryRoom-chart-C"){
+        chartDom = document.getElementById('batteryRoom-chart-C');
+    }else{
+        chartDom = document.getElementById('batteryRoom-chart-D');
+    }
+    let myChart = echarts.init(chartDom);
+    let option;
 
-    var data=[{
-        type: "indicator",
-        mode: "gauge+number+delta",
-        value: Number(tem),
-
-        delta: { increasing: { color: "white" } },
-        gauge: {
-            shape: 'angular',
-            axis: {
-                range: [0, 100],
-                visible: true,
-                tickwidth: 1,
-                tickcolor: "rgb(178, 178, 178)",
-                tickvals: [0, 100],
-                tickmode: 'array',
-                tickfont: {
-                    size: '100px'
-                }
+    const gaugeData = [
+        {
+            value: 20,
+            name: "Tem('C)",
+            title: {
+                offsetCenter: ['-35%', '70%']
             },
-            bar: { color: "rgb(237, 61, 61)", thickness: 1 },
-            bgcolor: "rgb(178, 178, 178)",
-            bordercolor: "rgb(178, 178, 178)",
-        }
-    }];
-
-    var layout = {
-        margin: {
-            l: 30,
-            r: 30,
-            b: 5,
-            t: 0,
-            pad: 0
-        }
+            detail: {
+                offsetCenter: ['-40%', '95%']
+            }
+        },
+        {
+            value: 40,
+            name: 'Hum(%)',
+            title: {
+                offsetCenter: ['35%', '70%']
+            },
+            detail: {
+                offsetCenter: ['40%', '95%']
+            }
+        },
+    ];
+    option = {
+        series: [
+            {
+                type: 'gauge',
+                anchor: {
+                    show: true,
+                    showAbove: true,
+                    size: 18,
+                    itemStyle: {
+                        color: '#FAC858'
+                    }
+                },
+                pointer: {
+                    width: 8,
+                    length: '70%',
+                    offsetCenter: [0, '8%']
+                },
+                progress: {
+                    show: true,
+                    overlap: true,
+                    roundCap: true
+                },
+                axisLine: {
+                    roundCap: true
+                },
+                data: gaugeData,
+                title: {
+                    fontSize: 10
+                },
+                detail: {
+                    width: 40,
+                    height: 14,
+                    fontSize: 12,
+                    color: '#fff',
+                    backgroundColor: 'inherit',
+                    borderRadius: 3,
+                    formatter: '{value}'
+                }
+            }
+        ]
     };
 
-    Plotly.newPlot(tagName, data, layout);
+    gaugeData[0].value = tem;
+    gaugeData[1].value = hum;
+    myChart.setOption({
+        series: [
+            {
+                data: gaugeData
+            }
+        ]
+    });
+
+    option && myChart.setOption(option);
 
     //차트 크기 반응형 핸들러 -start
+    resizeHandler();
     function resizeHandler () {
-        Plotly.newPlot(tagName, data, layout);
+        option && myChart.setOption(option);
     }
     if (window.addEventListener) {
         window.addEventListener('resize', resizeHandler, false);
@@ -172,59 +177,9 @@ function drawTem(tem, tagName){
         window.attachEvent('onresize', resizeHandler);
     }
     //차트 크기 반응형 핸들러 -end
+
 }
 
-function drawHum(hum, tagName){
-
-    var data=[{
-        type: "indicator",
-        mode: "gauge+number+delta",
-        value: Number(hum),
-
-        delta: { increasing: { color: "white" } },
-        gauge: {
-            shape: 'angular',
-            axis: {
-                range: [0, 100],
-                visible: true,
-                tickwidth: 1,
-                tickcolor: "rgb(178, 178, 178)",
-                tickvals: [0, 100],
-                tickmode: 'array',
-                tickfont: {
-                    size: '100px'
-                }
-            },
-            bar: { color: "rgb(22,78,222)", thickness: 1 },
-            bgcolor: "rgb(178, 178, 178)",
-            bordercolor: "rgb(178, 178, 178)",
-        }
-    }];
-
-    var layout = {
-        margin: {
-            l: 30,
-            r: 30,
-            b: 5,
-            t: 0,
-            pad: 0
-        }
-    };
-
-    Plotly.newPlot(tagName, data, layout);
-
-    //차트 크기 반응형 핸들러 -start
-    function resizeHandler () {
-        Plotly.newPlot(tagName, data, layout);
-    }
-    if (window.addEventListener) {
-        window.addEventListener('resize', resizeHandler, false);
-    }
-    else if (window.attachEvent) {
-        window.attachEvent('onresize', resizeHandler);
-    }
-    //차트 크기 반응형 핸들러 -end
-}
 
 function map(){
     var container = document.getElementById('map');
@@ -263,8 +218,7 @@ $(window).on('load', function(){
 });
 
 
-
-
+//탭 컨트롤
 $(document).ready(function(){
     $('.tabs a').click(function(){
         var tab_id = $(this).attr('data-tab');
