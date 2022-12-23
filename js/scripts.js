@@ -44,31 +44,25 @@ function apiCall() {
             return response.json();
         })
         .then((data) => {
-            let rack2 = data.rack2[0]; //배터리실 온ㆍ습도
-            let rack3 = data.rack3[0]; //실내 온ㆍ습도 1
-            let rack4 = data.rack4[0]; //실내 온ㆍ습도 2
-            let rack5 = data.rack5[0]; //실내 온ㆍ습도 3
+            //배터리실 A
+            $("#batteryRoom-tem").html("온도 : " + data.rack2[0]['sd1'] + " (℃)");
+            $("#batteryRoom-hum").html("습도 : " + data.rack2[0]['sd2'] + " (%)");
+            drawChart(data.rack2[0]['sd1'], data.rack2[0]['sd2'], "batteryRoom-chart-A");
 
+            //배터리실 B
+            $("#indoor1-tem").html("온도 : " + data.rack3[0]['sd1'] + " (℃)");
+            $("#indoor1-hum").html("습도 : " + data.rack3[0]['sd2'] + " (%)");
+            drawChart(data.rack3[0]['sd1'], data.rack3[0]['sd2'], "batteryRoom-chart-B");
 
-            $("#batteryRoom-tem").html("온도 : " + rack2['sd1'] + " (℃)");
-            $("#batteryRoom-hum").html("습도 : " + rack2['sd2'] + " (%)");
-            drawChart(rack2['sd1'], rack2['sd2'], "batteryRoom-chart-A");
+            //배터리실 C
+            $("#indoor2-tem").html("온도 : " + data.rack4[0]['sd1'] + " (℃)");
+            $("#indoor2-hum").html("습도 : " + data.rack4[0]['sd2'] + " (%)");
+            drawChart(data.rack4[0]['sd1'], data.rack4[0]['sd2'], "batteryRoom-chart-C");
 
-
-            $("#indoor1-tem").html("온도 : " + rack3['sd1'] + " (℃)");
-            $("#indoor1-hum").html("습도 : " + rack3['sd2'] + " (%)");
-            drawChart(rack3['sd1'], rack3['sd2'], "batteryRoom-chart-B");
-
-
-            $("#indoor2-tem").html("온도 : " + rack4['sd1'] + " (℃)");
-            $("#indoor2-hum").html("습도 : " + rack4['sd2'] + " (%)");
-            drawChart(rack4['sd1'], rack4['sd2'], "batteryRoom-chart-C");
-
-
-            $("#indoor3-tem").html("온도 : " + rack5['sd1'] + " (℃)");
-            $("#indoor3-hum").html("습도 : " + rack5['sd2'] + " (%)");
-            drawChart(rack5['sd1'], rack5['sd2'], "batteryRoom-chart-D");
-
+            //배터리실 D
+            $("#indoor3-tem").html("온도 : " + data.rack5[0]['sd1'] + " (℃)");
+            $("#indoor3-hum").html("습도 : " + data.rack5[0]['sd2'] + " (%)");
+            drawChart(data.rack5[0]['sd1'], data.rack5[0]['sd2'], "batteryRoom-chart-D");
 
         }).catch((error) => console.log("error : ", error));
 }
@@ -182,13 +176,27 @@ function drawChart(tem, hum, tagName){
 
 
 function map(){
-    var container = document.getElementById('map');
-    var options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 3
-    };
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(35.105436, 126.895638), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
 
-    var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+// 마커가 표시될 위치입니다
+    var markerPosition = new kakao.maps.LatLng(35.105436, 126.895638);
+
+// 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+// 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+
+// 마커가 드래그 가능하도록 설정합니다
+    marker.setDraggable(true);
 }
 
 function init() {
