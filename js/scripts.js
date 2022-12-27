@@ -199,28 +199,6 @@ function map(){
     marker.setDraggable(true);
 }
 
-function init() {
-    clock();
-    apiCall()
-
-    setInterval(clock, 1000);              //현재 시간 1초 루프
-    setInterval(apiCall, 5000);            //API 1초 루프
-
-    map();
-    // let socket = new WebSocket("ws://121.178.2.4:5050");
-    // socket.onopen = ()=>{
-    //     console.log("웹소켓 연결 성공");
-    // };
-    //
-    // socket.onmessage = function (e){
-    //     // document.getElementById("test").innerText = e.data;
-    //     console.log(e.data);
-    // }
-    // socket.onclose = function(){
-    //     console.log("웹 소켓 연결 종료");
-    // }
-}
-
 /**
  *  Change Theme
  *  Dark <-> Light
@@ -255,10 +233,10 @@ function setDisplayTheme(self){
 
         for(let i = 0; i <= 4; i++){
             element.cardHeader[i].style.backgroundColor = '#51515e';
-            element.cardBody[i].style.backgroundColor = '#5a5c69';
+            element.cardBody[i].style.backgroundColor = '#6f7180';
             element.cardHeader[i].style.color = 'white';
         }
-    //Change to LightMode
+        //Change to LightMode
     } else {
         element.body.style.backgroundColor = 'white';
         element.btn.style.backgroundColor = '#212529';
@@ -283,6 +261,30 @@ function setDisplayTheme(self){
         }
     }
 }
+
+function init() {
+    clock();
+    apiCall()
+
+    setInterval(clock, 1000);              //현재 시간 1초 루프
+    setInterval(apiCall, 5000);            //API 1초 루프
+
+    map();
+    // let socket = new WebSocket("ws://121.178.2.4:5050");
+    // socket.onopen = ()=>{
+    //     console.log("웹소켓 연결 성공");
+    // };
+    //
+    // socket.onmessage = function (e){
+    //     // document.getElementById("test").innerText = e.data;
+    //     console.log(e.data);
+    // }
+    // socket.onclose = function(){
+    //     console.log("웹 소켓 연결 종료");
+    // }
+}
+
+
 
 //탭 컨트롤
 $(document).ready(function(){
