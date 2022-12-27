@@ -209,6 +209,7 @@ table {
 
 .tabs-clicked{
     background-color: #c9c9c9;
+    color: black !important;
 }
 
 .tab-link:hover{
@@ -236,3 +237,10 @@ table {
     display: none !important;
 }
 
+.white{
+    color: white;
+}
+
+.black{
+    color: black;
+}

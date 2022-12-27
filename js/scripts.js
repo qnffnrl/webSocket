@@ -125,7 +125,7 @@ function drawChart(tem, hum, tagName){
                 progress: {
                     show: true,
                     overlap: true,
-                    roundCap: true
+                    roundCap: true,
                 },
                 axisLine: {
                     roundCap: true
@@ -221,16 +221,73 @@ function init() {
     // }
 }
 
-//Static Resource 모두 로딩 후 Start
-$(window).on('load', function(){
-    init();
-});
+/**
+ *  Change Theme
+ *  Dark <-> Light
+ */
+function setDisplayTheme(self){
 
+    //Target to Change
+    let element = {
+        body : document.querySelector('body'),
+        btn : document.getElementsByClassName('btn')[0],
+        title : document.getElementById('title'),
+        hr : document.getElementById('main-hr'),
+        cardHeader : document.getElementsByClassName('card-header'),
+        size4Card : document.getElementById('size-4-card'),
+        cardBody : document.getElementsByClassName('card-body'),
+    };
+
+    //Change to DarkMode
+    if(self.value === 'Dark'){
+        element.body.style.backgroundColor = '#2c2c34';
+        element.btn.style.backgroundColor = 'white';
+        element.btn.style.color = 'black';
+        element.title.style.color = 'white';
+        element.hr.style.color = 'white';
+        element.size4Card.style.backgroundColor = "#2c2c34";
+        element.size4Card.style.border = "1px solid #dfdfdf";
+        self.value = 'Light';
+        $('.tabs a').removeClass('black');
+        $('.tabs a').addClass('white');
+        $('.text-in-card').removeClass('black');
+        $('.text-in-card').addClass('white');
+
+        for(let i = 0; i <= 4; i++){
+            element.cardHeader[i].style.backgroundColor = '#51515e';
+            element.cardBody[i].style.backgroundColor = '#5a5c69';
+            element.cardHeader[i].style.color = 'white';
+        }
+    //Change to LightMode
+    } else {
+        element.body.style.backgroundColor = 'white';
+        element.btn.style.backgroundColor = '#212529';
+        element.size4Card.style.border = "1px solid #dfdfdf";
+        element.btn.style.color = 'white';
+        element.title.style.color = 'black';
+        element.hr.style.color = 'black';
+        element.size4Card.style.backgroundColor = "white";
+        self.value = 'Dark';
+        $('.tabs a').removeClass('white');
+        $('.tabs a').addClass('black');
+        $('.text-in-card').removeClass('white');
+        $('.text-in-card').addClass('black');
+
+        for(let i = 0; i <= 3; i++){
+            element.cardHeader[i].style.backgroundColor = '#F7F7F7';
+            element.cardHeader[i].style.color = 'black';
+            element.cardBody[i].style.backgroundColor = '#FFFFFF';
+        }
+        for(let k = 0; k <= 7; k++){
+            element.textInCard[k].style.color = 'black';
+        }
+    }
+}
 
 //탭 컨트롤
 $(document).ready(function(){
     $('.tabs a').click(function(){
-        var tab_id = $(this).attr('data-tab');
+        let tab_id = $(this).attr('data-tab');
 
 
         $('.tabs a').removeClass('current');
@@ -241,5 +298,11 @@ $(document).ready(function(){
         $(this).addClass('tabs-clicked');
         $("#"+tab_id).addClass('current');
     });
+});
+
+
+//Static Resource 모두 로딩 후 Start
+$(window).on('load', function(){
+    init();
 });
 
