@@ -68,7 +68,7 @@ function apiCall() {
 }
 
 function drawChart(tem, hum, tagName){
-    // console.warn = console.error = () => {};
+    console.warn = console.error = () => {};
     let chartDom;
 
     if(tagName === "batteryRoom-chart-A"){
@@ -207,13 +207,14 @@ function init() {
     setInterval(apiCall, 5000);            //API 1초 루프
 
     map();
-    // let socket = new WebSocket("ws://49.238.167.98:8005");
+    // let socket = new WebSocket("ws://121.178.2.4:5050");
     // socket.onopen = ()=>{
     //     console.log("웹소켓 연결 성공");
     // };
     //
     // socket.onmessage = function (e){
-    //     document.getElementById("test").innerText = e.data;
+    //     // document.getElementById("test").innerText = e.data;
+    //     console.log(e.data);
     // }
     // socket.onclose = function(){
     //     console.log("웹 소켓 연결 종료");

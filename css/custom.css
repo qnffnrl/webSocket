@@ -211,6 +211,11 @@ table {
     display: inherit;
 }
 
+#img{
+    width: 80%;
+    /*height: 70%;*/
+}
+
 .modebar-container > div:first-child{
     display: none !important;
 }
