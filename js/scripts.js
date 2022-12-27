@@ -232,10 +232,13 @@ $(document).ready(function(){
     $('.tabs a').click(function(){
         var tab_id = $(this).attr('data-tab');
 
+
         $('.tabs a').removeClass('current');
+        $('.tabs a').removeClass('tabs-clicked');
         $('.tab-content').removeClass('current');
 
         $(this).addClass('current');
+        $(this).addClass('tabs-clicked');
         $("#"+tab_id).addClass('current');
     });
 });
