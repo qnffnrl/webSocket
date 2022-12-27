@@ -1,11 +1,11 @@
-# webSocket
-배터리 모니터링 페이지 제작 (통신 : web socket 방식으로)
+# BSB
+배터리 모니터링 페이지 제작
 
 ## Todo
 * 온습도 차트 멋있는걸로
 * 가운데 4칸 짜리 탭 (이미지, 지도)
-* 통신 : 웹 소켓
-* 방식 : 키워드를 기준으로 (온습도 / 지도) request하면 서버에서 그에 맞는 response
+* 통신 : api call
+* 방식 : key 기준으로 (온습도 / 지도) request하면 서버에서 그에 맞는 response
 
 ## Reference
 * Template from -> https://startbootstrap.com/template/sb-admin
@@ -24,10 +24,10 @@
 
 ## Final Design (Theme)
 ### Light Mode
-![light](https://user-images.githubusercontent.com/71891870/202478717-368e63a1-9767-43e4-999e-f446ba526c1b.png)
+![light](https://user-images.githubusercontent.com/71891870/209642602-8db4aff6-4fad-4aa4-ad66-31dac8e0e623.png)
 
 ### Dark Mode
-![dark](https://user-images.githubusercontent.com/71891870/202478727-f56ba866-4699-4710-885b-f5781abea24c.png)
+![dark](https://user-images.githubusercontent.com/71891870/209642678-73029b42-f614-4b33-8141-78817d19b92e.png)
 
 ## Trouble Shooting
 * 페이지를 768px(col-md) 이하로 줄였을 때 현재 시간을 표시하는 부분이 표시가 안됨

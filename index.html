@@ -21,7 +21,7 @@
 
     <body class="sb-nav-fixed sb-sidenav-toggled px-3">
 
-        <!-- Navigation Bar -->
+        <!-- Top Bar -->
         <nav id="nav-bar" class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Logo -->
             <a id="logo" class="navbar-brand ps-3" href="index.html"><img src="images/logo.png"></a>
@@ -33,9 +33,7 @@
             <div id="time-sector" class="d-md-inline-block ms-auto me-0 me-md-3 my-2 my-md-0 d-flex">
                 <div>
                     <div>현재시간</div>
-                    <div class="bn_date">
-                        <!-- From Javascript -->
-                    </div>
+                    <div class="bn_date"><!-- From Javascript --></div>
                 </div>
             </div>
         </nav>
@@ -44,34 +42,16 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-
                         <br><br>
-
-<!--                        &lt;!&ndash; PCS 용량, 운영상태 출력 부분 &ndash;&gt;-->
-<!--                        <div id="power-state-parent" class="mt-3 d-flex justify-content-end">-->
-<!--                            <div class="border rounded fs-5 d-flex justify-content-between align-items-center px-2">-->
-<!--                                <span id="pcs">PCS 용량 : 200kW</span>-->
-<!--                            </div>-->
-
-<!--                            &lt;!&ndash; Power State &ndash;&gt;-->
-<!--                            <div id="power-state" class="border rounded fs-4 d-flex justify-content-between align-items-center px-2">-->
-<!--                                <span id="operating-state">운영상태</span>-->
-<!--                                <span>-->
-<!--                                    <div class="circle">-->
-<!--                                        &lt;!&ndash; From Javascript &ndash;&gt;-->
-<!--                                    </div>-->
-<!--                                </span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-                        <!-- Title -->
                         <h1 id="title" class="mt-3">Dashboard</h1>
                         <hr id="main-hr">
 
                         <!-- Battery State  -------------------------------------------Start------------------------------------------------------------->
-                        <div class="row d-flex flex-row justify-content-center">
-                            <div class="flex-column col-xl-3">
 
+                        <div class="row d-flex flex-row justify-content-center">
+
+                            <!-- 왼쪽 2칸 -->
+                            <div class="flex-column col-xl-3">
                                 <div>
                                     <div class="card mb-4">
                                         <div class="card-header">
@@ -79,8 +59,8 @@
                                         </div>
                                         <div class="card-body d-flex justify-content-center flex-column align-items-center">
                                             <div class="w-100 d-flex text-center">
-                                                <div class="w-50 text-in-card" id="batteryRoom-tem"><!-- From Javascript --></div>
-                                                <div class="w-50 text-in-card" id="batteryRoom-hum"><!-- From Javascript --></div>
+                                                <div class="w-50 text-in-card" id="batteryRoom-A-tem"><!-- From Javascript --></div>
+                                                <div class="w-50 text-in-card" id="batteryRoom-A-hum"><!-- From Javascript --></div>
                                             </div>
                                             <div class="w-100 w-100 chart-sector d-flex justify-content-center flex-column align-items-center" id="batteryRoom-chart-A">
                                                 <!-- From Javascript -->
@@ -96,8 +76,8 @@
                                         </div>
                                         <div class="card-body d-flex justify-content-center flex-column align-items-center">
                                             <div class="w-100 d-flex text-center">
-                                                <div class="w-50 text-in-card" id="indoor1-tem"><!-- From Javascript --></div>
-                                                <div class="w-50 text-in-card" id="indoor1-hum"><!-- From Javascript --></div>
+                                                <div class="w-50 text-in-card" id="batteryRoom-B-tem"><!-- From Javascript --></div>
+                                                <div class="w-50 text-in-card" id="batteryRoom-B-hum"><!-- From Javascript --></div>
                                             </div>
                                             <div class="w-100 w-100 chart-sector d-flex justify-content-center flex-column align-items-center" id="batteryRoom-chart-B">
                                                 <!-- From Javascript -->
@@ -105,9 +85,9 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
+                            <!-- 가운데 4칸 짜리 Tab -->
                             <div class="flex-column col-xl-6">
                                 <div class="h-96-8">
                                     <div id="size-4-card" class="card mb-4 h-100 w-100">
@@ -127,8 +107,8 @@
                                 </div>
                             </div>
 
+                            <!-- 오른쪽 2칸 -->
                             <div class="flex-column col-xl-3">
-
                                 <div>
                                     <div class="card mb-4">
                                         <div class="card-header">
@@ -136,8 +116,8 @@
                                         </div>
                                         <div class="card-body d-flex justify-content-center flex-column align-items-center">
                                             <div class="w-100 d-flex text-center">
-                                                <div class="w-50 text-in-card" id="indoor2-tem"><!-- From Javascript --></div>
-                                                <div class="w-50 text-in-card" id="indoor2-hum"><!-- From Javascript --></div>
+                                                <div class="w-50 text-in-card" id="batteryRoom-C-tem"><!-- From Javascript --></div>
+                                                <div class="w-50 text-in-card" id="batteryRoom-C-hum"><!-- From Javascript --></div>
                                             </div>
                                             <div class="w-100 w-100 chart-sector d-flex justify-content-center flex-column align-items-center" id="batteryRoom-chart-C">
                                                 <!-- From Javascript -->
@@ -153,8 +133,8 @@
                                         </div>
                                         <div class="card-body d-flex justify-content-center flex-column align-items-center">
                                             <div class="w-100 d-flex text-center">
-                                                <div class="w-50 text-in-card" id="indoor3-tem"><!-- From Javascript --></div>
-                                                <div class="w-50 text-in-card" id="indoor3-hum"><!-- From Javascript --></div>
+                                                <div class="w-50 text-in-card" id="batteryRoom-D-tem"><!-- From Javascript --></div>
+                                                <div class="w-50 text-in-card" id="batteryRoom-D-hum"><!-- From Javascript --></div>
                                             </div>
                                             <div class="w-100 w-100 d-flex chart-sector justify-content-center flex-column align-items-center" id="batteryRoom-chart-D">
                                                 <!-- From Javascript -->
@@ -163,21 +143,14 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
-
-
                         <!-- Battery State  ---------------------------------------------End------------------------------------------------------------>
-
-
 
                     </div>
                 </main>
             </div>
         </div>
-        <!-- Google Chart -->
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
         <!-- Bootstrap Default -->
         <script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
@@ -191,6 +164,7 @@
         <!-- Kakao Map -->
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=289011fd99ce23191c6fa8c1ec66de68"></script>
 
+        <!-- Echart -->
         <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.js"></script>
     </body>
 </html>

@@ -1,5 +1,4 @@
 /**
- * 현재 시간 출력 부분
  * Present Time
  */
 function clock(){
@@ -11,7 +10,7 @@ function clock(){
     let minutes = date.getMinutes();
     let seconds = date.getSeconds();
 
-    // 오전 or 오후 저장 변수
+    // AM or PM 저장 변수
     let amOrPm = "AM";
 
     // 12시 이상일 시
@@ -20,21 +19,19 @@ function clock(){
         hours -= 12;
     }
 
-    let hours_str = hours < 10 ? "0"+hours : hours;
-    let minutes_str = minutes < 10 ? "0"+minutes : minutes;
-    let seconds_str = seconds < 10 ? "0"+seconds : seconds;
+    //한 자릿수 월, 시, 분, 초 일경우 앞에 0 추가 (1 -> 01)
+    let clockDate_str = clockDate < 10 ? "0" + clockDate : clockDate;
+    let hours_str = hours < 10 ? "0" + hours : hours;
+    let minutes_str = minutes < 10 ? "0" + minutes : minutes;
+    let seconds_str = seconds < 10 ? "0" + seconds : seconds;
 
-    if (clockDate < 10) {
-        clockDate = "0" + clockDate;
-    }
-
-    $(".bn_date").html(nowYear + "-" + (month+1) + "-" + clockDate + " " + //날짜
+    $(".bn_date").html(nowYear + "-" + (month+1) + "-" + clockDate_str + " " + //날짜
         hours_str + ":"+minutes_str + ":" + seconds_str + amOrPm);         //시간
-
 }
 
+
 /**
- * Rack Data
+ *
  * API Call / Parsing
  */
 const normalUrl = "http://121.178.2.4:9000/api?api_key=4g21e1e2dd567ws11kk274nbdd3e0s30&type=normal";
@@ -46,23 +43,23 @@ function normalApiCall() {
         })
         .then((data) => {
             //배터리실 A
-            $("#batteryRoom-tem").html("온도 : " + data.sector_a[0] + " (℃)");
-            $("#batteryRoom-hum").html("습도 : " + data.sector_a[1] + " (%)");
+            $("#batteryRoom-A-tem").html("온도 : " + data.sector_a[0] + " (℃)");
+            $("#batteryRoom-A-hum").html("습도 : " + data.sector_a[1] + " (%)");
             drawChart(data.sector_a[0], data.sector_a[1], "batteryRoom-chart-A");
 
-            // //배터리실 B
-            $("#indoor1-tem").html("온도 : " + data.sector_b[0] + " (℃)");
-            $("#indoor1-hum").html("습도 : " + data.sector_b[1] + " (%)");
+            //배터리실 B
+            $("#batteryRoom-B-tem").html("온도 : " + data.sector_b[0] + " (℃)");
+            $("#batteryRoom-B-hum").html("습도 : " + data.sector_b[1] + " (%)");
             drawChart(data.sector_b[0], data.sector_b[1], "batteryRoom-chart-B");
 
-            // //배터리실 C
-            $("#indoor2-tem").html("온도 : " + data.sector_c[0] + " (℃)");
-            $("#indoor2-hum").html("습도 : " + data.sector_c[1] + " (%)");
+            //배터리실 C
+            $("#batteryRoom-C-tem").html("온도 : " + data.sector_c[0] + " (℃)");
+            $("#batteryRoom-C-hum").html("습도 : " + data.sector_c[1] + " (%)");
             drawChart(data.sector_c[0], data.sector_c[1], "batteryRoom-chart-C");
 
-            // //배터리실 D
-            $("#indoor3-tem").html("온도 : " + data.sector_d[0] + " (℃)");
-            $("#indoor3-hum").html("습도 : " + data.sector_d[1] + " (%)");
+            //배터리실 D
+            $("#batteryRoom-D-tem").html("온도 : " + data.sector_d[0] + " (℃)");
+            $("#batteryRoom-D-hum").html("습도 : " + data.sector_d[1] + " (%)");
             drawChart(data.sector_d[0], data.sector_d[1], "batteryRoom-chart-D");
 
         }).catch((error) => console.log("error : ", error));
@@ -78,6 +75,11 @@ function gpsApiCall(){
         }).catch((error) => console.log("error : ", error));
 }
 
+
+/**
+ * Tem, Hum Chart Draw
+ * Param (온도, 습도, 태그명)
+ */
 function drawChart(tem, hum, tagName){
     console.warn = console.error = () => {};
     let chartDom;
@@ -186,6 +188,10 @@ function drawChart(tem, hum, tagName){
 }
 
 
+/**
+ * Kakao Map Api Call
+ * Param (위도, 경도)
+ */
 function map(lat, lng){
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
@@ -209,6 +215,7 @@ function map(lat, lng){
 // 마커가 드래그 가능하도록 설정합니다
     marker.setDraggable(true);
 }
+
 
 /**
  *  Change Theme
@@ -245,10 +252,10 @@ function setDisplayTheme(self){
         $('.tab-content').addClass('darkBackground');
 
 
-        for(let i = 0; i <= 4; i++){
+        for(let i = 0; i <= 3; i++){
             element.cardHeader[i].style.backgroundColor = '#51515e';
-            element.cardBody[i].style.backgroundColor = '#6f7180';
             element.cardHeader[i].style.color = 'white';
+            element.cardBody[i].style.backgroundColor = '#6f7180';
         }
         //Change to LightMode
     } else {
@@ -272,38 +279,13 @@ function setDisplayTheme(self){
             element.cardHeader[i].style.color = 'black';
             element.cardBody[i].style.backgroundColor = '#FFFFFF';
         }
-        for(let k = 0; k <= 7; k++){
-            element.textInCard[k].style.color = 'black';
-        }
     }
 }
 
-function init() {
-    clock();
-    normalApiCall()
-    gpsApiCall()
 
-    setInterval(clock, 1000);         //현재 시간 1초 루프
-    setInterval(normalApiCall, 5000); //온습도 api call 5초 루프
-    setInterval(gpsApiCall, 10000);   //gps api call 10초 루프
-
-    // let socket = new WebSocket("ws://121.178.2.4:5050");
-    // socket.onopen = ()=>{
-    //     console.log("웹소켓 연결 성공");
-    // };
-    //
-    // socket.onmessage = function (e){
-    //     // document.getElementById("test").innerText = e.data;
-    //     console.log(e.data);
-    // }
-    // socket.onclose = function(){
-    //     console.log("웹 소켓 연결 종료");
-    // }
-}
-
-
-
-//탭 컨트롤
+/**
+ * Tab control
+ */
 $(document).ready(function(){
     $('.tabs a').click(function(){
         let tab_id = $(this).attr('data-tab');
@@ -320,7 +302,23 @@ $(document).ready(function(){
 });
 
 
-//Static Resource 모두 로딩 후 Start
+function init() {
+
+    //최초 load
+    clock();
+    normalApiCall()
+    gpsApiCall()
+
+    setInterval(clock, 1000);         //현재 시간 1초 루프
+    setInterval(normalApiCall, 5000); //온습도 api call 5초 루프
+    setInterval(gpsApiCall, 10000);   //gps api call 10초 루프
+
+}
+
+
+/**
+ * Static Resource 모두 로딩 후 Start
+ */
 $(window).on('load', function(){
     init();
 });
