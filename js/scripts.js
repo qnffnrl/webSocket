@@ -29,7 +29,7 @@ function clock(){
     }
 
     $(".bn_date").html(nowYear + "-" + (month+1) + "-" + clockDate + " " + //날짜
-        amOrPm + hours_str + ":"+minutes_str + ":" + seconds_str);         //시간
+        hours_str + ":"+minutes_str + ":" + seconds_str + amOrPm);         //시간
 
 }
 
@@ -37,33 +37,44 @@ function clock(){
  * Rack Data
  * API Call / Parsing
  */
-const url = "http://121.178.2.4:9000/api?api_key=2a618e17de2f851d74216ddef0256bc1";
-function apiCall() {
-    fetch(url)
+const normalUrl = "http://121.178.2.4:9000/api?api_key=4g21e1e2dd567ws11kk274nbdd3e0s30&type=normal";
+const gpsUrl = "http://121.178.2.4:9000/api?api_key=4g21e1e2dd567ws11kk274nbdd3e0s30&type=gps";
+function normalApiCall() {
+    fetch(normalUrl)
         .then((response) => {
             return response.json();
         })
         .then((data) => {
             //배터리실 A
-            $("#batteryRoom-tem").html("온도 : " + data.rack2[0]['sd1'] + " (℃)");
-            $("#batteryRoom-hum").html("습도 : " + data.rack2[0]['sd2'] + " (%)");
-            drawChart(data.rack2[0]['sd1'], data.rack2[0]['sd2'], "batteryRoom-chart-A");
+            $("#batteryRoom-tem").html("온도 : " + data.sector_a[0] + " (℃)");
+            $("#batteryRoom-hum").html("습도 : " + data.sector_a[1] + " (%)");
+            drawChart(data.sector_a[0], data.sector_a[1], "batteryRoom-chart-A");
 
-            //배터리실 B
-            $("#indoor1-tem").html("온도 : " + data.rack3[0]['sd1'] + " (℃)");
-            $("#indoor1-hum").html("습도 : " + data.rack3[0]['sd2'] + " (%)");
-            drawChart(data.rack3[0]['sd1'], data.rack3[0]['sd2'], "batteryRoom-chart-B");
+            // //배터리실 B
+            $("#indoor1-tem").html("온도 : " + data.sector_b[0] + " (℃)");
+            $("#indoor1-hum").html("습도 : " + data.sector_b[1] + " (%)");
+            drawChart(data.sector_b[0], data.sector_b[1], "batteryRoom-chart-B");
 
-            //배터리실 C
-            $("#indoor2-tem").html("온도 : " + data.rack4[0]['sd1'] + " (℃)");
-            $("#indoor2-hum").html("습도 : " + data.rack4[0]['sd2'] + " (%)");
-            drawChart(data.rack4[0]['sd1'], data.rack4[0]['sd2'], "batteryRoom-chart-C");
+            // //배터리실 C
+            $("#indoor2-tem").html("온도 : " + data.sector_c[0] + " (℃)");
+            $("#indoor2-hum").html("습도 : " + data.sector_c[1] + " (%)");
+            drawChart(data.sector_c[0], data.sector_c[1], "batteryRoom-chart-C");
 
-            //배터리실 D
-            $("#indoor3-tem").html("온도 : " + data.rack5[0]['sd1'] + " (℃)");
-            $("#indoor3-hum").html("습도 : " + data.rack5[0]['sd2'] + " (%)");
-            drawChart(data.rack5[0]['sd1'], data.rack5[0]['sd2'], "batteryRoom-chart-D");
+            // //배터리실 D
+            $("#indoor3-tem").html("온도 : " + data.sector_d[0] + " (℃)");
+            $("#indoor3-hum").html("습도 : " + data.sector_d[1] + " (%)");
+            drawChart(data.sector_d[0], data.sector_d[1], "batteryRoom-chart-D");
 
+        }).catch((error) => console.log("error : ", error));
+}
+
+function gpsApiCall(){
+    fetch(gpsUrl)
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            map(data['lat'], data['lng']);
         }).catch((error) => console.log("error : ", error));
 }
 
@@ -175,17 +186,17 @@ function drawChart(tem, hum, tagName){
 }
 
 
-function map(){
+function map(lat, lng){
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
-            center: new kakao.maps.LatLng(35.2014475, 126.8636426), // 지도의 중심좌표
+            center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
             level: 3 // 지도의 확대 레벨
         };
 
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 // 마커가 표시될 위치입니다
-    var markerPosition = new kakao.maps.LatLng(35.2014475, 126.8636426);
+    var markerPosition = new kakao.maps.LatLng(lat, lng);
 
 // 마커를 생성합니다
     var marker = new kakao.maps.Marker({
@@ -269,12 +280,13 @@ function setDisplayTheme(self){
 
 function init() {
     clock();
-    apiCall()
+    normalApiCall()
+    gpsApiCall()
 
-    setInterval(clock, 1000);              //현재 시간 1초 루프
-    setInterval(apiCall, 5000);            //API 1초 루프
+    setInterval(clock, 1000);         //현재 시간 1초 루프
+    setInterval(normalApiCall, 5000); //온습도 api call 5초 루프
+    setInterval(gpsApiCall, 10000);   //gps api call 10초 루프
 
-    map();
     // let socket = new WebSocket("ws://121.178.2.4:5050");
     // socket.onopen = ()=>{
     //     console.log("웹소켓 연결 성공");
