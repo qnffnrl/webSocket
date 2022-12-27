@@ -178,14 +178,14 @@ function drawChart(tem, hum, tagName){
 function map(){
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
-            center: new kakao.maps.LatLng(35.105436, 126.895638), // 지도의 중심좌표
+            center: new kakao.maps.LatLng(35.2014475, 126.8636426), // 지도의 중심좌표
             level: 3 // 지도의 확대 레벨
         };
 
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 // 마커가 표시될 위치입니다
-    var markerPosition = new kakao.maps.LatLng(35.105436, 126.895638);
+    var markerPosition = new kakao.maps.LatLng(35.2014475, 126.8636426);
 
 // 마커를 생성합니다
     var marker = new kakao.maps.Marker({
@@ -230,6 +230,9 @@ function setDisplayTheme(self){
         $('.tabs a').addClass('white');
         $('.text-in-card').removeClass('black');
         $('.text-in-card').addClass('white');
+        $('.tab-content').removeClass('whiteBackground');
+        $('.tab-content').addClass('darkBackground');
+
 
         for(let i = 0; i <= 4; i++){
             element.cardHeader[i].style.backgroundColor = '#51515e';
@@ -250,6 +253,8 @@ function setDisplayTheme(self){
         $('.tabs a').addClass('black');
         $('.text-in-card').removeClass('white');
         $('.text-in-card').addClass('black');
+        $('.tab-content').removeClass('darkBackground');
+        $('.tab-content').addClass('whiteBackground');
 
         for(let i = 0; i <= 3; i++){
             element.cardHeader[i].style.backgroundColor = '#F7F7F7';
