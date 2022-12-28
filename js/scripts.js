@@ -312,6 +312,6 @@ $(window).on('load', function(){
 
     setInterval(clock, 1000);         //현재 시간 1초 루프
     setInterval(normalApiCall, 5000); //온습도 api call 5초 루프
-    setInterval(gpsApiCall, 10000);   //gps api call 10초 루프
+    setInterval(gpsApiCall, 30000);   //gps api call 10초 루프
 });
 
