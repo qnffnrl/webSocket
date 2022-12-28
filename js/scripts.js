@@ -302,24 +302,16 @@ $(document).ready(function(){                           //Fold Point
 });
 
 
-function init() {                           //Fold Point
-
+/**
+ * Static Resource 모두 로딩 후 Start
+ */
+$(window).on('load', function(){
     //최초 load
-    clock();
     normalApiCall()
     gpsApiCall()
 
     setInterval(clock, 1000);         //현재 시간 1초 루프
     setInterval(normalApiCall, 5000); //온습도 api call 5초 루프
     setInterval(gpsApiCall, 10000);   //gps api call 10초 루프
-
-}
-
-
-/**
- * Static Resource 모두 로딩 후 Start
- */
-$(window).on('load', function(){
-    init();
 });
 
