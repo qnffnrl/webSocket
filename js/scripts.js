@@ -1,7 +1,7 @@
 /**
  * Present Time
  */
-function clock(){
+function clock(){                           //Fold Point
     let date = new Date();
     let nowYear = date.getFullYear();
     let month = date.getMonth();
@@ -36,7 +36,7 @@ function clock(){
  */
 const normalUrl = "http://121.178.2.4:9000/api?api_key=4g21e1e2dd567ws11kk274nbdd3e0s30&type=normal";
 const gpsUrl = "http://121.178.2.4:9000/api?api_key=4g21e1e2dd567ws11kk274nbdd3e0s30&type=gps";
-function normalApiCall() {
+function normalApiCall() {                           //Fold Point
     fetch(normalUrl)
         .then((response) => {
             return response.json();
@@ -65,7 +65,7 @@ function normalApiCall() {
         }).catch((error) => console.log("error : ", error));
 }
 
-function gpsApiCall(){
+function gpsApiCall(){                           //Fold Point
     fetch(gpsUrl)
         .then((response) => {
             return response.json();
@@ -80,7 +80,7 @@ function gpsApiCall(){
  * Tem, Hum Chart Draw
  * Param (온도, 습도, 태그명)
  */
-function drawChart(tem, hum, tagName){
+function drawChart(tem, hum, tagName){                           //Fold Point
     console.warn = console.error = () => {};
     let chartDom;
 
@@ -192,7 +192,7 @@ function drawChart(tem, hum, tagName){
  * Kakao Map Api Call
  * Param (위도, 경도)
  */
-function map(lat, lng){
+function map(lat, lng){                           //Fold Point
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
             center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
@@ -221,7 +221,7 @@ function map(lat, lng){
  *  Change Theme
  *  Dark <-> Light
  */
-function setDisplayTheme(self){
+function setDisplayTheme(self){                           //Fold Point
 
     //Target to Change
     let element = {
@@ -286,7 +286,7 @@ function setDisplayTheme(self){
 /**
  * Tab control
  */
-$(document).ready(function(){
+$(document).ready(function(){                           //Fold Point
     $('.tabs a').click(function(){
         let tab_id = $(this).attr('data-tab');
 
@@ -302,7 +302,7 @@ $(document).ready(function(){
 });
 
 
-function init() {
+function init() {                           //Fold Point
 
     //최초 load
     clock();
