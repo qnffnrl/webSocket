@@ -42,6 +42,7 @@ function normalApiCall() {                           //Fold Point
             return response.json();
         })
         .then((data) => {
+
             //배터리실 A
             $("#batteryRoom-A-tem").html("온도 : " + data.sector_a[0] + " (℃)");
             $("#batteryRoom-A-hum").html("습도 : " + data.sector_a[1] + " (%)");
@@ -62,6 +63,13 @@ function normalApiCall() {                           //Fold Point
             $("#batteryRoom-D-hum").html("습도 : " + data.sector_d[1] + " (%)");
             drawChart(data.sector_d[0], data.sector_d[1], "batteryRoom-chart-D");
 
+            //Gas Data
+            $("#text-voc").html("voc : " + data.gas['voc']);
+            $("#text-nh3").html("nh3 : " + data.gas['nh3']);
+            $("#text-co2").html("co2 : " + data.gas['co2']);
+            $("#text-co").html("co : " + data.gas['co']);
+            drawLineChart(data.gas['voc'], data.gas['nh3'], data.gas['co2'], data.gas['co']);
+
         }).catch((error) => console.log("error : ", error));
 }
 
@@ -75,6 +83,90 @@ function gpsApiCall(){                           //Fold Point
         }).catch((error) => console.log("error : ", error));
 }
 
+/**
+ * Gas Line Chart Draw
+ * Param (voc, nh3, co2, co)
+ */
+let initArray = [[], [], [], []];
+
+function drawLineChart(voc, nh3, co2, co){
+
+    if(initArray.length > 4){
+        initArray[0].shift();
+        initArray[1].shift();
+        initArray[2].shift();
+        initArray[3].shift();
+    }
+
+    initArray[0].push(voc);
+    initArray[1].push(nh3);
+    initArray[2].push(co2);
+    initArray[3].push(co);
+
+    let dom = document.getElementById('chart-container');
+    let myChart = echarts.init(dom, null, {
+        renderer: 'canvas',
+        useDirtyRect: false
+    });
+
+    let option;
+
+    option = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['voc', 'nh3', 'co2', 'co']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            // data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'qwe']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name: 'voc',
+                type: 'line',
+                stack: 'Total',
+                data: [initArray[0][0], initArray[0][1], initArray[0][2], initArray[0][3], initArray[0][4]]
+            },
+            {
+            name: 'nh3',
+            type: 'line',
+            stack: 'Total',
+            data: [initArray[1][0], initArray[1][1], initArray[1][2], initArray[1][3], initArray[1][4]]
+            },
+            {
+            name: 'co2',
+            type: 'line',
+            stack: 'Total',
+            data: [initArray[2][0], initArray[2][1], initArray[2][2], initArray[2][3], initArray[2][4]]
+            },
+            {
+            name: 'co',
+            type: 'line',
+            stack: 'Total',
+            data: [initArray[3][0], initArray[3][1], initArray[3][2], initArray[3][3], initArray[3][4]]
+            },
+        ]
+    };
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+
+}
 
 /**
  * Tem, Hum Chart Draw
@@ -193,26 +285,26 @@ function drawChart(tem, hum, tagName){                           //Fold Point
  * Param (위도, 경도)
  */
 function map(lat, lng){                           //Fold Point
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    let mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
             center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
             level: 3 // 지도의 확대 레벨
         };
 
-    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+    let map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-// 마커가 표시될 위치입니다
-    var markerPosition = new kakao.maps.LatLng(lat, lng);
+    // 마커가 표시될 위치입니다
+    let markerPosition = new kakao.maps.LatLng(lat, lng);
 
-// 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
+    // 마커를 생성합니다
+    let marker = new kakao.maps.Marker({
         position: markerPosition
     });
 
-// 마커가 지도 위에 표시되도록 설정합니다
+    // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
 
-// 마커가 드래그 가능하도록 설정합니다
+    // 마커가 드래그 가능하도록 설정합니다
     marker.setDraggable(true);
 }
 
@@ -252,7 +344,7 @@ function setDisplayTheme(self){                           //Fold Point
         $('.tab-content').addClass('darkBackground');
 
 
-        for(let i = 0; i <= 3; i++){
+        for(let i = 0; i <= 4; i++){
             element.cardHeader[i].style.backgroundColor = '#51515e';
             element.cardHeader[i].style.color = 'white';
             element.cardBody[i].style.backgroundColor = '#6f7180';
@@ -274,7 +366,7 @@ function setDisplayTheme(self){                           //Fold Point
         $('.tab-content').removeClass('darkBackground');
         $('.tab-content').addClass('whiteBackground');
 
-        for(let i = 0; i <= 3; i++){
+        for(let i = 0; i <= 4; i++){
             element.cardHeader[i].style.backgroundColor = '#F7F7F7';
             element.cardHeader[i].style.color = 'black';
             element.cardBody[i].style.backgroundColor = '#FFFFFF';
