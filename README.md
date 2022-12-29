@@ -7,6 +7,7 @@
 * 가운데 4칸 짜리 탭 (이미지, 지도)
 * 통신 : api call
 * 방식 : key 기준으로 (온습도 / 지도) request하면 서버에서 그에 맞는 response
+* 추가사항 : 카드 하단에 수평 4칸 짜리 가스 데이터 표현 수치 or 그래프 구현
 
 ## Reference
 * Template from -> https://startbootstrap.com/template/sb-admin
