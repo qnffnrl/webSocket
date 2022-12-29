@@ -42,7 +42,6 @@ function normalApiCall() {                           //Fold Point
             return response.json();
         })
         .then((data) => {
-
             //배터리실 A
             $("#batteryRoom-A-tem").html("온도 : " + data.sector_a[0] + " (℃)");
             $("#batteryRoom-A-hum").html("습도 : " + data.sector_a[1] + " (%)");
@@ -169,7 +168,7 @@ function drawLineChart(voc, nh3, co2, co){
 }
 
 /**
- * Tem, Hum Chart Draw
+ * Tem, Hum Gauge Chart Draw
  * Param (온도, 습도, 태그명)
  */
 function drawChart(tem, hum, tagName){                           //Fold Point
