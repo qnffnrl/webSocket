@@ -4,7 +4,7 @@
 function clock(){                           //Fold Point
     let date = new Date();
     let nowYear = date.getFullYear();
-    let month = date.getMonth();
+    let month = date.getMonth() + 1;
     let clockDate = date.getDate();
     let hours = date.getHours();
     let minutes = date.getMinutes();
@@ -19,13 +19,14 @@ function clock(){                           //Fold Point
         hours -= 12;
     }
 
-    //한 자릿수 월, 시, 분, 초 일경우 앞에 0 추가 (1 -> 01)
+    //한 자릿수 월, 시, 일, 분, 초 일경우 앞에 0 추가 (1 -> 01)
+    let month_str = month < 10 ? "0" + month : month;
     let clockDate_str = clockDate < 10 ? "0" + clockDate : clockDate;
     let hours_str = hours < 10 ? "0" + hours : hours;
     let minutes_str = minutes < 10 ? "0" + minutes : minutes;
     let seconds_str = seconds < 10 ? "0" + seconds : seconds;
 
-    $(".bn_date").html(nowYear + "-" + (month+1) + "-" + clockDate_str + " " + //날짜
+    $(".bn_date").html(nowYear + "-" + (month_str) + "-" + clockDate_str + " " + //날짜
         hours_str + ":"+minutes_str + ":" + seconds_str + amOrPm);         //시간
 }
 
